@@ -15,7 +15,7 @@ export default {
   name: 'Photos',
   data() {
     return {
-      key: process.env.VUE_APP_ACCESS_KEY,
+      key: process.env.VUE_APP_APIKEY,
       loading: false,
       searchInput: '',
       photos: []
