@@ -1,20 +1,15 @@
 <template>
-  <div class='photos'>
+  <div>
     <form v-on:submit.prevent='getPhotos'>
-      <input type='text' id='search' v-model='search' placeholder='search for photos' />
-      <img v-if='loading' src='https://primelinetools.com/pub/media/catalog/product/placeholder/default/ajax-loader02_5.gif' alt='loading circle' class='loading'>
+      <input type='text' id='search' v-model='searchInput' placeholder='search for photos' />
     </form>
-    <div class='photo-container'>
-      <div v-for='photo in photos' v-bind:key='photo.display'>
-        <a v-bind:href='photo.link' target='_blank'>
-          <img v-bind:src='photo.display' class='photo'>
-        </a>
-      </div>
-    </div>
+    <img v-if='loading' src='https://primelinetools.com/pub/media/catalog/product/placeholder/default/ajax-loader02_5.gif' alt='loading circle' class='loading'>
+    <PhotoContainer :photos='photos' />
   </div>
 </template>
 
 <script>
+import PhotoContainer from './PhotoContainer';
 
 export default {
   name: 'Photos',
@@ -22,7 +17,7 @@ export default {
     return {
       key: process.env.VUE_APP_ACCESS_KEY,
       loading: false,
-      search: '',
+      searchInput: '',
       photos: []
     }
   },
@@ -30,30 +25,43 @@ export default {
     async getPhotos() {
       this.photos = [];
       this.loading = true;
-      const url = `https://api.unsplash.com/search/photos?page=1&per_page=30&query=${this.search}&client_id=${this.key}`
+      const url = `https://api.unsplash.com/search/photos?page=1&per_page=30&query=${this.searchInput}&client_id=${this.key}`
       const response = await fetch(url);
       try {
         if(response.ok) {
           const photos = await response.json();
-          this.cleanPhotos(photos.results);
+          this.selectPhotos(photos.results);
         }
       } catch (err) {
-        // console.log(err.message)
+        return err;
       }
-      this.search = '';
+      this.searchInput = '';
       this.loading = false;
     },
 
-    cleanPhotos (photos) {
+    selectPhotos (photos) {
       this.photos = photos.map(photo => ({display: photo.urls.regular, link: photo.links.html}))
     }
+  },
+  components: {
+    PhotoContainer
   }
 
 }
 </script>
 
 <style scoped>
-
+  input {
+    border: 1px solid #CCC;
+    border-radius: 50px;
+    border-style: solid;
+    font-size: 1.5em;
+    margin-top: 20px;
+    padding: 8px;
+    padding-left: 15px;
+    outline: none;
+    width: 500px;
+  }
 </style>
 
 
