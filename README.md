@@ -13,7 +13,7 @@ These instructions will get a copy of the project up and running on your local m
 ### Frontend
 clone down the repo:
 
-`https://github.com/IsaacSunoo/photo-searcher``
+`https://github.com/IsaacSunoo/photo-searcher`
 
 cd into directory and run npm install
 
