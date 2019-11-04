@@ -26,9 +26,9 @@ export default {
       this.photos = [];
       this.loading = true;
       const url = `https://api.unsplash.com/search/photos?page=1&per_page=30&query=${this.searchInput}&client_id=${this.key}`
-      const response = await fetch(url);
       try {
         if(response.ok) {
+          const response = await fetch(url);
           const photos = await response.json();
           this.selectPhotos(photos.results);
         }

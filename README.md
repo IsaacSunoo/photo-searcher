@@ -1,7 +1,7 @@
 # Photo Searcher
 
 ## Overview:
-Photo Searcher was built with vuejs and the unsplash photo api.  It is a simple SPA that lets the user search keywords to fetch data from unsplash and displays the images to the browser.
+Photo Searcher was built with vuejs and the unsplash photo api.  It is a simple SPA that lets the user search keywords to fetch data from unsplash and displays the images to the browser. This project was built in a couple days and the objective was to learn a new framework quickly and build an application utilizing it.
 
 ## Live link
  https://photo-searcher.herokuapp.com/
